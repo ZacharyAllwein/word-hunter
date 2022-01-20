@@ -129,3 +129,8 @@ class WordHunter:
         wordList = sorted(wordList, key=len)
 
         return wordList
+
+
+if __name__ == "__main__":
+    letters = input(": ")
+    wordHunter = WordHunter(letters)
