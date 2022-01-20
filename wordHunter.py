@@ -3,7 +3,6 @@ from nltk.corpus import words
 import numpy as np
 import random
 import string
-import re
 import itertools
 
 WORDS = words.words()
@@ -130,7 +129,3 @@ class WordHunter:
         wordList = sorted(wordList, key=len)
 
         return wordList
-
-
-letters = input(": ")
-wordHunter = WordHunter(letters)
