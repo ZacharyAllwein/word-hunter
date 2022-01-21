@@ -15,7 +15,7 @@ LETDIST = {
 class WordHunter:
     def __init__(self, letters=None, mode="hunt"):
 
-        #if letters is none create 16 random
+        # if letters is none create 16 random
         self.letters = (
             letters
             if letters is not None
@@ -28,7 +28,7 @@ class WordHunter:
 
         self.mode = mode
 
-        #mode seperation
+        # mode seperation
         if self.mode == "hunt":
             # random weighted letterMatrix for word finding
 
@@ -45,7 +45,7 @@ class WordHunter:
 
             print(self.letters)
 
-            #only uses isAnagram function to create list
+            # only uses isAnagram function to create list
             self.words = sorted(
                 list(filter(lambda x: self.isAnagram(x) and len(x) > 2, WORDS)), key=len
             )
@@ -115,20 +115,20 @@ class WordHunter:
 
                     # if depth first returns a truth value, break the loop and return value of isWord
                     if depthFirst(move, restOfWord[1:], visited) is True:
+
                         isWord = True
                         break
 
             return isWord
 
-        # keep track of different results for starting indexes
-        truthList = []
-
         # different indicies will have different results so it is ran in a for loop
         for start in startIndicies:
-            truthList.append(depthFirst(start, word[1:]))
+          
+            if depthFirst(start, word[1:]) is True:
+                return True
 
-        # returns true if any value in truthlist is true
-        return True if True in truthList else False
+        # return False if depth first never evalueates to true
+        return False
 
     def getWords(self):
 
@@ -146,4 +146,4 @@ class WordHunter:
 
 if __name__ == "__main__":
     letters = input(": ")
-    wordHunter = WordHunter(mode="anagram")
+    wordHunter = WordHunter()
