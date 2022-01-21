@@ -13,40 +13,53 @@ LETDIST = {
 
 
 class WordHunter:
-    def __init__(self, letters=None):
+    def __init__(self, letters=None, mode="hunt"):
 
-        # random weighted letterMatrix for word finding
-        self.letterMatrix = (
-            np.array(
-                [
-                    random.choices(
-                        string.ascii_lowercase,
-                        weights=(i for i in LETDIST.values()),
-                        k=4,
-                    )
-                    for i in range(4)
-                ]
+        #if letters is none create 16 random
+        self.letters = (
+            letters
+            if letters is not None
+            else "".join(
+                random.choices(
+                    string.ascii_lowercase, weights=(i for i in LETDIST.values()), k=16
+                )
             )
-            if letters is None
-            else np.array(list(letters)).reshape((4, 4))
         )
-        print(self.letterMatrix)
 
-        # for regex and anagram operations
-        self.stringMatrix = "".join([j for i in self.letterMatrix for j in i])
+        self.mode = mode
 
-        # needed to narrow down
-        self.words = self.getWords()
+        #mode seperation
+        if self.mode == "hunt":
+            # random weighted letterMatrix for word finding
+
+            self.letterMatrix = np.array(list(self.letters)).reshape((4, 4))
+
+            print(self.letterMatrix)
+
+            # for regex and anagram operations
+
+            # needed to narrow down
+            self.words = self.getWords()
+
+        elif self.mode == "anagram":
+
+            print(self.letters)
+
+            #only uses isAnagram function to create list
+            self.words = sorted(
+                list(filter(lambda x: self.isAnagram(x) and len(x) > 2, WORDS)), key=len
+            )
+
         print(self.words)
 
     # function to figure out if a word can be made from a list of chars given
     def isAnagram(self, word):
 
         # create counters for comparison
-        letterMatrixCounter = Counter(self.stringMatrix)
+        letterMatrixCounter = Counter(self.letters)
         wordCounter = Counter(word)
 
-        if False in [let in self.stringMatrix for let in wordCounter]:
+        if False in [let in self.letters for let in wordCounter]:
             return False
 
         # format letterMatrixCounter in terms of wordCounter keys
@@ -133,4 +146,4 @@ class WordHunter:
 
 if __name__ == "__main__":
     letters = input(": ")
-    wordHunter = WordHunter(letters)
+    wordHunter = WordHunter(mode="anagram")
