@@ -123,7 +123,7 @@ class WordHunter:
 
         # different indicies will have different results so it is ran in a for loop
         for start in startIndicies:
-          
+
             if depthFirst(start, word[1:]) is True:
                 return True
 
@@ -143,10 +143,7 @@ class WordHunter:
 
         return wordList
 
+
 if __name__ == "__main__":
     letters = input(": ")
-<<<<<<< HEAD
-    wordHunter = WordHunter(letters)
-=======
-    wordHunter = WordHunter()
->>>>>>> 4e00ac8266c3f3ef566b9d8847f939aafc7a5c66
+    wordHunter = WordHunter(letters, "anagram")
