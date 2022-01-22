@@ -130,7 +130,6 @@ class WordHunter:
 
         return wordList
 
-
 if __name__ == "__main__":
     letters = input(": ")
     wordHunter = WordHunter(letters)
