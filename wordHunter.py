@@ -4,6 +4,7 @@ import numpy as np
 import random
 import string
 import itertools
+import sys
 
 WORDS = words.words()
 
@@ -145,5 +146,7 @@ class WordHunter:
 
 
 if __name__ == "__main__":
-    letters = input(": ")
-    wordHunter = WordHunter(letters, "anagram")
+    args = sys.argv
+    letters = args[1]
+    mode = args[2]
+    wordHunter = WordHunter(letters, mode)
